@@ -1,0 +1,16 @@
+build/
+config/
+dist/index.html
+dist/static/
+examples/
+node_modules/
+static/
+test/
+
+# File
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc.js
+.postcssrc.js
+README.md
