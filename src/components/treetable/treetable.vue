@@ -3,9 +3,9 @@
     <caption v-if="caption">{{caption}}</caption>
     <thead>
       <tr>
-        <!-- <th v-if="selection">
-          <input type="checkbox" />
-        </th> -->
+        <th v-if="selection">
+          <input type="checkbox" class="selection" value="" @change="(evt)=>{ handleSelect(evt, '') }" />
+        </th>
         <template v-for="column in columns">
         <th v-if="column.renderType == 'selection'" :key="column.key" >
           <input type="checkbox" class="selection" value="" @change="(evt)=>{ handleSelect(evt, '') }" />
@@ -92,7 +92,7 @@ export default {
       display: this.display,
       columnId: this.selection ? this.columnId + 1 : this.columnId,
       columnParentId: this.selection ? this.columnParentId + 1 : this.columnParentId,
-      columnHandle: this.selection ? this.columnId + 1 : this.columnHandle
+      columnHandle: this.selection ? this.columnHandle + 1 : this.columnHandle
     });
   },
   methods: {

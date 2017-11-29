@@ -5,6 +5,14 @@
   "author": "Max",
   "license": "MIT",
   "main": "dist/cw-ui-treetable.min.js",
+  "homepage": "https://github.com/cloudwalk-projects/cw-ui-treetable#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudwalk-projects/cw-ui-treetable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cloudwalk-projects/cw-ui-treetable/issues"
+  },
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
@@ -41,7 +49,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^3.2.4",
     "css-loader": "^0.26.1",
-    "eslint": "^3.14.1",
+    "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.0.1",
     "eslint-config-standard": "10.2.1",
     "eslint-friendly-formatter": "^2.0.7",
@@ -49,6 +57,9 @@
     "eslint-loader": "^1.6.1",
     "eslint-plugin-html": "^2.0.0",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.14.1",
     "extract-text-webpack-plugin": "^2.0.0",
@@ -74,7 +85,7 @@
     "phantomjs-prebuilt": "^2.1.14",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
-    "sinon": "^1.17.7",
+    "sinon": "^4.0.0",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.7",
     "vue-loader": "^11.1.4",
