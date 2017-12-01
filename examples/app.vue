@@ -3,11 +3,16 @@
   <div style="padding:10px;">
     <cw-treetable :columns="tableColumns" :rows="tableRows" selection></cw-treetable>
   </div>
-  <!--
+
   <div style="padding:0 10px 10px 10px;">
     <cw-treetable :columns="tableColumns2" :rows="tableRows" :columnId="0" :columnParentId="1" :columnHandle="2"></cw-treetable>
   </div>
 
+  <div style="padding:0 10px 10px 10px;">
+    <cw-treetable :columns="table3.columns" :rows="table3.rows" :columnId="0" :columnParentId="1" :columnHandle="2"></cw-treetable>
+  </div>
+
+  <div style="padding:0 10px 10px 10px;">
   <table ref="treetable" id="treeTableWrapper" class="table-style table-full-border-style x-ui-tree-table" style="width:100%;">
     <caption>Table 1: 树形列表示例</caption>
     <thead>
@@ -34,16 +39,162 @@
       <tr class="table-row-normal"><td>6</td><td>3</td><td>行11</td><td>1123</td><td>2234</td><td>1234</td></tr>
       <tr class="table-row-normal"><td>11</td><td>7</td><td>行12</td><td>1123</td><td>2234</td><td>1234</td></tr>
     </tbody>
-  </table> -->
+  </table>
+  </div>
 </div>
 </template>
 
 <script>
 import TreeTableTranslator from '../src/core/TreeTableTranslator';
 
+const table3 = {
+  columns: [
+    {
+      key: 'id',
+      label: '区域编号'
+    },
+    {
+      key: 'parentId',
+      label: '上级区域'
+    },
+    {
+      key: 'name',
+      label: '区域名称'
+    },
+    {
+      key: 'level',
+      label: '区域级别',
+      width: '100px'
+    },
+    {
+      key: 'status',
+      label: '是否启用',
+      width: '100px'
+    },
+    {
+      key: 'remark',
+      label: '备注',
+      width: '100px'
+    },
+    {
+      key: 'action',
+      label: '操作',
+      width: '100px',
+      renderType: 'render',
+      render: function(h, params) {
+        return h('div', [
+          h(
+            'a',
+            {
+              props: {
+                type: 'primary',
+                size: 'small'
+              },
+              style: {
+                marginRight: '5px'
+              },
+              on: {
+                click: () => {
+                  console.log('view');
+                  // this.show(params.index);
+                  console.log(params);
+                }
+              }
+            },
+            '查看'
+          ),
+          h(
+            'a',
+            {
+              attrs: {
+                href: 'http://www.baidu.com',
+                target: '_blank'
+              },
+              on: {
+                click: () => {
+                  console.log('delete');
+                  // this.remove(params.index);
+                  console.log(params);
+                }
+              }
+            },
+            '删除'
+          )
+        ]);
+      }
+    }
+  ],
+  rows: [
+    {
+      id: '100',
+      parentId: '',
+      name: '行 100',
+      status: 1,
+      remark: '行 100'
+    },
+    {
+      id: '101',
+      parentId: '100',
+      name: '行 101',
+      status: 0,
+      remark: '行 101'
+    },
+    {
+      id: '102',
+      parentId: '100',
+      name: '行 102',
+      status: 1,
+      remark: '行 102'
+    },
+    {
+      id: '103',
+      parentId: '100',
+      name: '行 103',
+      status: 1,
+      remark: '行 103'
+    },
+    {
+      id: '104',
+      parentId: '101',
+      name: '行 104',
+      status: 1,
+      remark: '行 104'
+    },
+    {
+      id: '1',
+      parentId: '',
+      name: '行 1',
+      status: 1,
+      remark: '行 1'
+    },
+    {
+      id: '1-1',
+      parentId: '1',
+      name: '行 1-1',
+      status: 1,
+      remark: '行 1-1'
+    },
+    {
+      id: '2',
+      parentId: '',
+      name: '行 2',
+      status: 1,
+      remark: '行 2'
+    },
+    {
+      id: '2-1',
+      parentId: '2',
+      name: '行 2-1',
+      status: 1,
+      remark: '行 2-1'
+    }
+  ]
+};
+
 export default {
   data() {
     return {
+      table3,
       tableColumns: [
         //{
         //  key: 'selection',
@@ -80,28 +231,30 @@ export default {
           key: 'action',
           label: '操作',
           width: '100px',
-          renderType:'render',
+          renderType: 'render',
           render: function(h, params) {
-            return h('div', [h(
-              'button', {
-                props: {
-                  type: 'primary',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    console.log('view');
-                    // this.show(params.index);
-                    console.log(params);
+            return h('div', [
+              h(
+                'button',
+                {
+                  props: {
+                    type: 'primary',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      console.log('view');
+                      // this.show(params.index);
+                      console.log(params);
+                    }
                   }
-                }
-              },
-              '查看'
-            ),
-            h(
+                },
+                '查看'
+              ),
+              h(
                 'button',
                 {
                   props: {
@@ -116,7 +269,9 @@ export default {
                     }
                   }
                 },
-                '删除')]);
+                '删除'
+              )
+            ]);
           }
         }
       ],
@@ -152,28 +307,30 @@ export default {
           key: 'action',
           label: '操作',
           width: '100px',
-          renderType:'render',
+          renderType: 'render',
           render: function(h, params) {
-            return h('div', [h(
-              'button', {
-                props: {
-                  type: 'primary',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    console.log('view');
-                    // this.show(params.index);
-                    console.log(params);
+            return h('div', [
+              h(
+                'button',
+                {
+                  props: {
+                    type: 'primary',
+                    size: 'small'
+                  },
+                  style: {
+                    marginRight: '5px'
+                  },
+                  on: {
+                    click: () => {
+                      console.log('view');
+                      // this.show(params.index);
+                      console.log(params);
+                    }
                   }
-                }
-              },
-              '查看'
-            ),
-            h(
+                },
+                '查看'
+              ),
+              h(
                 'button',
                 {
                   props: {
@@ -188,7 +345,9 @@ export default {
                     }
                   }
                 },
-                '删除')]);
+                '删除'
+              )
+            ]);
           }
         }
       ],
