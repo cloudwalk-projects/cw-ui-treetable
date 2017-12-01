@@ -36,6 +36,10 @@ module.exports = {
           formatter: require('eslint-friendly-formatter')
         }
       },
+      //{
+      //  test: /\.css$/,
+      //  use: [ 'style-loader', 'postcss-loader' ]
+      //},
       {
         test: /\.vue$/,
         loader: 'vue-loader',

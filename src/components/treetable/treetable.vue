@@ -1,9 +1,9 @@
 <template>
    <table ref="treetable" class="table cw-treetable" >
     <caption v-if="caption">{{caption}}</caption>
-    <thead>
+    <thead class="cw-treetable__thead">
       <tr>
-        <th v-if="selection">
+        <th v-if="selection" class="cw-treetable__selection">
           <input type="checkbox" class="selection" value="" @change="(evt)=>{ handleSelect(evt, '') }" />
         </th>
         <template v-for="column in columns">
@@ -15,19 +15,16 @@
         </template>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="cw-treetable__tbody">
     <template>
     </template>
     <template v-for="(row, index) in rows">
-      <tr :key="row.id">
-        <td v-if="selection" :key="row.id + '-selection'" >
+      <tr :key="row.id" class="cw-treetable__row">
+        <td v-if="selection" :key="row.id + '-selection'" class="cw-treetable__selection" >
             <input type="checkbox" class="selection" :value="row.id" @change="(evt)=>{ handleSelect(evt, row.id) }" />
         </td>
         <template v-for="column in columns">
-          <td v-if="column.renderType == 'selection'" :key="row.id + column.key" >
-            <input type="checkbox" class="selection" :value="row.id" @change="(evt)=>{ handleSelect(evt, row.id) }" />
-          </td>
-          <td v-else-if="column.renderType == 'render'" :key="row.id + column.key" >
+          <td v-if="column.renderType == 'render'" :key="row.id + column.key" >
             <treetable-column :index="index" :row="row" :render="column.render"></treetable-column>
           </td>
           <td v-else :key="row.id + column.key" >{{row[column.key]}}</td>
