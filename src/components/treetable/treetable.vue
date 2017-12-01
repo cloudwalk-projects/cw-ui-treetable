@@ -124,19 +124,3 @@ export default {
   }
 };
 </script>
-
-<style >
-.cw-treetable {
-  width: 100%;
-  border: 1px solid #ccc;
-}
-.cw-treetable tr th {
-  text-align: left;
-}
-.cw-treetable tr th,
-.cw-treetable tr td
-{
-  text-align: left;
-  line-height: 120%;
-}
-</style>

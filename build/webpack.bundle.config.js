@@ -12,26 +12,18 @@ config.context = path.resolve(__dirname, '..');
 
 // Client entry
 config.entry = {
-  CwMap: path.resolve(__dirname, '../src/index.js')
+  CwTreeTable: path.resolve(__dirname, '../src/index.js')
 };
 
 // Basic output config
 config.output = {
   path: path.resolve(__dirname, '../dist'),
-  filename: 'cw-ui-map.js',
-  library: ["CwMap"],
+  filename: 'cw-ui-treetable.js',
+  library: ["CwTreeTable"],
   libraryTarget: "umd",
 };
 
 config.externals = [{
-  'leaflet': {
-    umd: 'L',
-    root: 'L',
-    global: 'L',
-    commonjs2: 'leaflet',
-    commonjs: 'leaflet',
-    amd: 'leaflet'
-  },
   'vue': {
     umd: 'Vue',
     global: 'Vue',
@@ -39,6 +31,14 @@ config.externals = [{
     commonjs2: 'vue',
     commonjs: 'vue',
     amd: 'vue'
+  },
+  'x-lib': {
+    umd: 'x',
+    global: 'x',
+    root: 'x',
+    commonjs2: 'x',
+    commonjs: 'x',
+    amd: 'x'
   }
 }];
 // Resolver config
@@ -76,7 +76,7 @@ config.module = {
 console.log(process.env.NODE_ENV)
 
 if (process.env.NODE_ENV === 'production') {
-  config.output.filename = "cw-ui-map.min.js"
+  config.output.filename = "cw-ui-treetable.min.js"
   config.devtool = '#source-map';
 
   // Pass build environment inside bundle

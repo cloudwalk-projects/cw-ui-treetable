@@ -1,45 +1,15 @@
 <template lang="html">
 <div class="example-page">
   <div style="padding:10px;">
-    <cw-treetable :columns="tableColumns" :rows="tableRows" selection></cw-treetable>
+    <cw-treetable caption="带选择框的表格" :columns="tableColumns" :rows="tableRows" selection></cw-treetable>
   </div>
 
   <div style="padding:0 10px 10px 10px;">
-    <cw-treetable :columns="tableColumns2" :rows="tableRows" :columnId="0" :columnParentId="1" :columnHandle="2"></cw-treetable>
+    <cw-treetable caption="默认的树形表格" :columns="tableColumns2" :rows="tableRows" selection></cw-treetable>
   </div>
 
   <div style="padding:0 10px 10px 10px;">
     <cw-treetable :columns="table3.columns" :rows="table3.rows" :columnId="0" :columnParentId="1" :columnHandle="2"></cw-treetable>
-  </div>
-
-  <div style="padding:0 10px 10px 10px;">
-  <table ref="treetable" id="treeTableWrapper" class="table-style table-full-border-style x-ui-tree-table" style="width:100%;">
-    <caption>Table 1: 树形列表示例</caption>
-    <thead>
-      <tr class="table-row-title">
-        <th>区域编号</th>
-        <th>上级区域</th>
-        <th>区域名称</th>
-        <th style="width:100px">区域级别</th>
-        <th style="width:100px">是否启用</th>
-        <th style="width:100px">备注</th>
-      </tr>
-    </thead>
-    <tbody ref="treetableBody" id="test-table-body-1" class="x-ui-tree-table-tbody">
-      <tr class="table-row-normal"><td>1</td><td>2</td><td>行1</td><td>1111</td><td>212312</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>10</td><td>9</td><td>行2</td><td>1111</td><td>2234</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>2</td><td></td><td>行3</td><td>12131</td><td>2234</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>3</td><td>1</td><td>行4</td><td>1123</td><td>2234</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>7</td><td></td><td>行5</td><td>1123</td><td>2234</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>8</td><td>4</td><td>行6</td><td>1123</td><td>2234</td><td>1243</td></tr>
-      <tr class="table-row-normal"><td>9</td><td>5</td><td>行7</td><td>1123</td><td>2234</td><td>1243</td></tr>
-      <tr class="table-row-normal"><td>4</td><td>3</td><td>行8</td><td>1123</td><td>2234</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>12</td><td>4</td><td>行9</td><td>1123</td><td>2234</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>5</td><td>6</td><td>行10</td><td>1123</td><td>2234</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>6</td><td>3</td><td>行11</td><td>1123</td><td>2234</td><td>1234</td></tr>
-      <tr class="table-row-normal"><td>11</td><td>7</td><td>行12</td><td>1123</td><td>2234</td><td>1234</td></tr>
-    </tbody>
-  </table>
   </div>
 </div>
 </template>
@@ -51,11 +21,11 @@ const table3 = {
   columns: [
     {
       key: 'id',
-      label: '区域编号'
+      label: '编号'
     },
     {
       key: 'parentId',
-      label: '上级区域'
+      label: '上级编号'
     },
     {
       key: 'name',

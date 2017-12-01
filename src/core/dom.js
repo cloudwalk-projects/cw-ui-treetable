@@ -2,7 +2,7 @@
   // 创建空白缩进
   indent: function(number = 1) {
     var span = document.createElement('span');
-    span.style.paddingRight = number * 5 + 'px';
+    span.style.paddingRight = number * 4 + 'px';
 
     return span;
   },

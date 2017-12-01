@@ -1,0 +1,36 @@
+@charset "UTF-8";
+@import "./common/var.css";
+@component-namespace cw {
+    @b treetable {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--font-size-base);
+        @e thead {
+            tr {
+                th {
+                    text-align: left;
+                    padding: var(--treetable-cell-padding);
+                    border: var(--treetable-border);
+                    line-height: var(--treetable-cell-line-height);
+                    background-color: var(--treetable-head-background);
+                }
+            }
+        }
+        @e tbody {
+            tr {
+                td {
+                    text-align: left;
+                    padding: var(--treetable-cell-padding);
+                    border: var(--treetable-border);
+                    line-height: var(--treetable-cell-line-height);
+                }
+            }
+        }
+        /**
+         * 选择框列的样式
+         */
+        @e selection {
+            width: 20px;
+        }
+    }
+}
