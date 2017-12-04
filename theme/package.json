@@ -1,7 +1,7 @@
 {
   "name": "cw-ui-treetable-theme",
   "version": "0.0.1",
-  "description": "Element component default theme.",
+  "description": "treetable component default theme.",
   "files": [
     "src"
   ],

@@ -12,7 +12,7 @@ module.exports = {
   // extends: 'airbnb-base',
   extends: 'standard',
   // required to lint *.vue files
-  plugins: ['html','import'],
+  plugins: ['html', 'import'],
   // check if imports actually resolve
   settings: {
     'import/resolver': {
@@ -41,15 +41,10 @@ module.exports = {
     'arrow-parens': 0,
     // allow async-await
     'generator-star-spacing': 0,
+    //
     'linebreak-style': 0,
+    //
     'no-param-reassign': 0,
-    // allow optionalDependencies
-    //'import/no-extraneous-dependencies': [
-    //  'error',
-    //  {
-    //    optionalDependencies: ['test/unit/index.js']
-    //  }
-    //],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

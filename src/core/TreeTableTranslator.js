@@ -4,20 +4,20 @@ import dom from './dom';
 
 // 默认设置
 var defaults = {
-  columnId: 0,             // Id            td列 {从0开始}
-  columnParentId: 1,       // ParentId      td列 {从0开始}
-  columnHandle: 2,         // 动作栏        td列 {从0开始}
-  columnOrderId: -1,       // OrderId       td列 {从0开始}
+  columnId: 0, // Id            td列 {从0开始}
+  columnParentId: 1, // ParentId      td列 {从0开始}
+  columnHandle: 2, // 动作栏        td列 {从0开始}
+  columnOrderId: -1, // OrderId       td列 {从0开始}
   iconOpen: require('../assets/images/treetable/minus.gif'),
   iconClose: require('../assets/images/treetable/plus.gif'),
-  display: 'expand'       // collapsed (折叠) | expand (展开)
+  display: 'expand' // collapsed (折叠) | expand (展开)
 };
 
 var TreeTableTranslator = {
   /*#region 函数:trim(text)*/
   /**
-  * 注 jQuery的trim处理不了&nbsp;产生的"空格"
-  */
+   * 注 jQuery的trim处理不了&nbsp;产生的"空格"
+   */
   trim: function(text) {
     return text.replace(/(^[\s\xA0]*)|([\s\xA0]*jQuery)/g, '');
   },
@@ -26,40 +26,21 @@ var TreeTableTranslator = {
   translate: function(options) {
     options = x.extend({}, defaults, options || {});
 
-    // var me = $('#' + options.targetName);
     var thead = options.target.querySelector('thead');
     var tbody = options.target.querySelector('tbody');
 
-    // 只处理一个表格
+    // 空对象处理
     if (!tbody) return;
 
-    if (tbody.tagName.toUpperCase() != 'TBODY') return; // 只应用于tbody
-
-    // var options = jQuery.extend({}, jQuery.treeTable.defaults, settings);
+    // 只应用于 thead 和 tbody 标签
+    if (thead.tagName.toUpperCase() != 'THEAD' || tbody.tagName.toUpperCase() != 'TBODY') return;
 
     if (options.columnId == null || options.columnParentId == null || options.columnHandle == null) return;
 
-    // var jQueryme = jQuery(me);
-
     var originalRows = [];
     var sortedRows = [];
-    //构建行对象数组
-    /*
-    jQueryme.find('tr').each(function() {
-      var id = jQuery.trim(
-        jQuery(this)
-          .find('td:eq(' + options.columnId + ')')
-          .text()
-      );
-      var parent = jQuery.trim(
-        jQuery(this)
-          .find('td:eq(' + options.columnParentId + ')')
-          .text()
-      );
 
-      originalRows.push({ id: id, parent: parent, level: 0, node: 'leaf', expanded: true, obj: jQuery(this) });
-    });
-    */
+    //构建行对象数组
     var list = tbody.querySelectorAll('tr');
 
     x.each(list, function(index, node) {
@@ -94,9 +75,11 @@ var TreeTableTranslator = {
         } else {
           for (let j = 0; j < sortedRows.length; j++) {
             if (sortedRows[j].id == node.parent) {
-              node.level = sortedRows[j].level + 1; // 从父行累计生成层次level
+              // 从父行累计生成层次level
+              node.level = sortedRows[j].level + 1;
               sortedRows[j].node = 'node';
-              sortedRows.splice(j + 1, 0, node); // 数组插入
+              // 数组插入
+              sortedRows.splice(j + 1, 0, node);
               originalRows[i] = null;
               length--;
               break;
@@ -110,15 +93,6 @@ var TreeTableTranslator = {
 
     //展开事件动作函数
     var handleClick = function() {
-      /*var id = x.ui.pkg.treeTable.trim(
-        jQuery(this)
-          .parent()
-          .parent()
-          .find('td:eq(' + options.columnId + ')')
-          .text()
-      ); //获取当前行Id
-      */
-      // .querySelectorAll('td')[options.columnId]
       var id = x.string.trim(this.parentNode.parentNode.querySelectorAll('td')[options.columnId].innerHTML);
 
       var v = -1;
@@ -152,7 +126,8 @@ var TreeTableTranslator = {
 
             let img = node.obj.querySelectorAll('td')[options.columnHandle].querySelector('img');
 
-            var t = !node.expanded; //判断是否是收起状态
+            //判断是否是收起状态
+            var t = !node.expanded;
 
             if (node.level > v && show) {
               //展开操作
@@ -179,7 +154,6 @@ var TreeTableTranslator = {
               }
             } else if (node.level > v && !show) {
               //收起操作则隐藏所以子行
-              // node.obj.hide();
               node.obj.style.display = 'none';
             } else if (node.level <= v) {
               //到达非子行，处理完毕
@@ -194,61 +168,54 @@ var TreeTableTranslator = {
 
     // 重新绘制表格，添加展开动作图标
     for (let j = sortedRows.length - 1; j > -1; j--) {
-      //prepend插入tbody内需使用反序
+      // prepend 插入 tbody 内需使用反序
       var node = sortedRows[j];
 
-      // var img = jQuery('<img src="' + options.iconOpen + '">');
-      // img.click(handleClick);
       var img = new Image();
       img.src = options.iconOpen;
 
       // 绑定点击事件
       x.on(img, 'click', handleClick);
 
-      // var tr = node.obj.find('td:eq(' + options.columnHandle + ')');
       var tr = node.obj.querySelectorAll('td')[options.columnHandle];
 
       var space = '&nbsp;';
-      // var space = ' ';
 
-      // tr.prepend();
-      // tr.prepend(space);
-      tr.prepend(dom.indent());
-      tr.prepend(img);
+      tr.insertBefore(dom.indent(), tr.firstChild);
+      tr.insertBefore(img, tr.firstChild);
 
       // 生成缩进空格
-      // var indent = new Array(node.level * 5).join(space);
-      // tr.prepend(indent);
+      tr.insertBefore(dom.indent(node.level * 4), tr.firstChild);
 
-      tr.prepend(dom.indent(node.level * 4));
-
-      tbody.prepend(node.obj);
+      tbody.insertBefore(node.obj, tbody.firstChild);
     } //for
 
+    // 重新获取排序后的行信息
+    list = tbody.querySelectorAll('tr');
+
+    // 折叠
     if (options.display == 'collapsed') {
-      /*
-      jQuery(me)
-        .find('tr')
-        .find('td:eq(' + options.columnHandle + ')')
-        .find('img')
-        .click();
-      */
-      x.each(tbody.querySelectorAll('tr'), function(index, node) {
+      x.each(list, function(index, node) {
         let target = node.querySelectorAll('td')[options.columnHandle].querySelector('img');
         target.click();
       });
     }
 
     // 隐藏相关的列
+    x.each(list, function(index, node) {
+      var element = node.querySelectorAll('td')[options.columnId];
+      element.style.display = 'none';
+
+      element = node.querySelectorAll('td')[options.columnParentId];
+      element.style.display = 'none';
+
+      // 设置鼠标样式
+      element = node.querySelectorAll('td')[options.columnHandle].querySelector('img');
+      element.style.cursor = 'pointer';
+    });
 
     // 隐藏头部信息
     list = thead.querySelectorAll('tr');
-    /*
-    jQuery(me).parent().find('tr:eq(0)').find('th:eq(' + options.columnId + ')').hide();
-    jQuery(me).parent().find('tr:eq(0)')
-      .find('th:eq(' + options.columnParentId + ')')
-      .hide();
-    */
 
     x.each(list, function(index, node) {
       let element = node.querySelectorAll('th')[options.columnId];
@@ -259,39 +226,6 @@ var TreeTableTranslator = {
       if (element) {
         element.style.display = 'none';
       }
-    });
-
-    // 重新获取排序后的行信息
-    list = tbody.querySelectorAll('tr');
-
-    /*
-    jQuery(me)
-      .find('tr')
-      .find('td:eq(' + options.columnId + ')')
-      .hide();
-    jQuery(me)
-      .find('tr')
-      .find('td:eq(' + options.columnParentId + ')')
-      .hide();
-    */
-
-    /*
-    // 添加图标鼠标样式
-    jQuery(me)
-      .find('tr')
-      .find('td:eq(' + options.columnHandle + ')')
-      .find('img')
-      .css('cursor', 'pointer');
-    */
-    x.each(list, function(index, node) {
-      var element = node.querySelectorAll('td')[options.columnId];
-      element.style.display = 'none';
-
-      element = node.querySelectorAll('td')[options.columnParentId];
-      element.style.display = 'none';
-
-      element = node.querySelectorAll('td')[options.columnHandle].querySelector('img');
-      element.style.cursor = 'pointer';
     });
   }
 };
