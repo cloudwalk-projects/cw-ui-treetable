@@ -4,13 +4,10 @@
     <thead class="cw-treetable__thead">
       <tr>
         <th v-if="selection" class="cw-treetable__selection">
-          <input type="checkbox" class="selection" value="" @change="(evt)=>{ handleSelect(evt, '') }" />
+          <input type="checkbox" class="selection" value="" @change="(evt)=>{ handleChange(evt, '') }" />
         </th>
         <template v-for="column in columns">
-        <th v-if="column.renderType == 'selection'" :key="column.key" >
-          <input type="checkbox" class="selection" value="" @change="(evt)=>{ handleSelect(evt, '') }" />
-        </th>
-        <th v-else-if="column.width" :key="column.key" :style="{width:column.width}">{{column.label}}</th>
+        <th v-if="column.width" :key="column.key" :style="{width:column.width}" >{{column.label}}</th>
         <th v-else :key="column.key" >{{column.label}}</th>
         </template>
       </tr>
@@ -21,11 +18,11 @@
     <template v-for="(row, index) in rows">
       <tr :key="row.id" class="cw-treetable__row">
         <td v-if="selection" :key="row.id + '-selection'" class="cw-treetable__selection" >
-            <input type="checkbox" class="selection" :value="row.id" @change="(evt)=>{ handleSelect(evt, row.id) }" />
+            <input type="checkbox" class="selection" :value="row.id" @change="(evt)=>{ handleChange(evt, row.id) }" />
         </td>
         <template v-for="column in columns">
           <td v-if="column.renderType == 'render'" :key="row.id + column.key" >
-            <treetable-column :index="index" :row="row" :render="column.render"></treetable-column>
+            <treetable-column :index="index" :row="row" :render="column.render" ></treetable-column>
           </td>
           <td v-else :key="row.id + column.key" >{{row[column.key]}}</td>
         </template>
@@ -93,7 +90,7 @@ export default {
     });
   },
   methods: {
-    handleSelect(evt, id) {
+    handleChange(evt, id) {
       var list = this.$el.querySelectorAll('.selection');
       var row = null;
 
@@ -101,7 +98,7 @@ export default {
         list[i].dataset.id = list[i].value;
         list[i].dataset.parentId = list[i].value == '' ? '' : list[i].parentNode.parentNode.querySelectorAll('td')[2].innerHTML;
         if (list[i].value.length > 0) {
-          console.log(list[i].parentNode.parentNode.querySelectorAll('td')[2].innerHTML);
+          // console.log(list[i].parentNode.parentNode.querySelectorAll('td')[2].innerHTML);
         }
         if (list[i].value == id) {
           row = list[i];
