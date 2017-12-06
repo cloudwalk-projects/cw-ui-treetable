@@ -10,25 +10,47 @@
       text-align: left;
       padding: 6px 8px;
     }
+    &.borderless {
+      tr {
+        th, td {
+          border: none !important;
+        }
+      }
+    }
     @e thead {
       tr {
         th {
+          height: 54px;
           text-align: left;
+          vertical-align: middle;
           padding: var(--treetable-cell-padding);
           border: var(--treetable-border);
-          line-height: var(--treetable-cell-line-height);
-          background-color: var(--treetable-head-background);
+          color: var(--treetable-th-color);
+          background-color: var(--treetable-th-background);
         }
       }
     }
     @e tbody {
       tr {
         td {
+          height: 45px;
           text-align: left;
+          vertical-align: middle;
+          word-wrap: break-word;
+          word-break: break-all;
           padding: var(--treetable-cell-padding);
           border: var(--treetable-border);
-          line-height: var(--treetable-cell-line-height);
+          color: var(--treetable-td-color);
         }
+      }
+      tr:nth-child(2n){
+        background: var(--treetable-td-background);
+      }
+      tr:nth-child(2n+1){
+        background: var(--treetable-td-stripe-background);
+      }
+      tr:hover{
+        background: var(--treetable-td-hover-background);
       }
     }
     /**

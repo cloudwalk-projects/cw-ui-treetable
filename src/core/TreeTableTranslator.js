@@ -177,15 +177,18 @@ var TreeTableTranslator = {
       // 绑定点击事件
       x.on(img, 'click', handleClick);
 
-      var tr = node.obj.querySelectorAll('td')[options.columnHandle];
+      var td = node.obj.querySelectorAll('td')[options.columnHandle];
 
-      var space = '&nbsp;';
+      // 设置原始内容
+      if (td.dataset['raw']) {
+        td.innerHTML = td.dataset['raw'];
+      }
 
-      tr.insertBefore(dom.indent(), tr.firstChild);
-      tr.insertBefore(img, tr.firstChild);
+      td.insertBefore(dom.indent(), td.firstChild);
+      td.insertBefore(img, td.firstChild);
 
       // 生成缩进空格
-      tr.insertBefore(dom.indent(node.level * 4), tr.firstChild);
+      td.insertBefore(dom.indent(node.level * 4), td.firstChild);
 
       tbody.insertBefore(node.obj, tbody.firstChild);
     } //for
@@ -218,11 +221,19 @@ var TreeTableTranslator = {
     list = thead.querySelectorAll('tr');
 
     x.each(list, function(index, node) {
-      let element = node.querySelectorAll('th')[options.columnId];
+      let elements = node.querySelectorAll('th');
+
+      for (let i = 0; i < elements.length; i++) {
+        if (elements[i].style.display == 'none') {
+          elements[i].style.display = '';
+        }
+      }
+
+      let element = elements[options.columnId];
       if (element) {
         element.style.display = 'none';
       }
-      element = node.querySelectorAll('th')[options.columnParentId];
+      element = elements[options.columnParentId];
       if (element) {
         element.style.display = 'none';
       }

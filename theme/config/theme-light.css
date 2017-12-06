@@ -17,22 +17,28 @@
   --color-light-black                  : color(var(--color-base-black) h(+5) s(27%) l(27%));
   --color-extra-light-black            : color(var(--color-base-black) h(+2) s(19%) l(35%));
 
+  --color-base-silver                  : color(var(--color-base-black) h(+3) s(16%) l(58%));
+  --color-light-silver                 : color(var(--color-base-black) h(+3) s(23%) l(67%));
+  --color-extra-light-silver           : color(var(--color-base-black) s(26%) l(80%));
+
+  --color-hover-background             : #f5f5f5;
+
   /* Font
   -------------------------- */
   --font-size-base                     : 14px;
-  --font-color-base                    : #cbcbcb;
+  --font-color-base                    : var(--color-base-black);
   --font-color-disabled-base           : #bbb;
 
   /* treetable
   -------------------------- */
   --treetable-th-color                 : var(--font-color-base);
-  --treetable-th-background            : #33353d;
+  --treetable-th-background            : #fafafa;
   --treetable-td-color                 : var(--font-color-base);
-  --treetable-td-background            : #24262d;
-  --treetable-td-stripe-background     : #212228;
-  --treetable-td-hover-background      : #2d2f38;
-  --treetable-td-highlight-background  : #2d2f38;
-  --treetable-border                   : 1px solid #333;
+  --treetable-td-background            : #ffffff;
+  --treetable-td-stripe-background     : #fdfdfd;
+  --treetable-td-hover-background      : var(--color-hover-background);
+  --treetable-td-highlight-background  : var(--color-hover-background);
+  --treetable-border                   : 1px solid #ccc;
   --treetable-cell-line-height         : 1.5;
   --treetable-cell-padding             : 0 16px 0 16px;
 }
