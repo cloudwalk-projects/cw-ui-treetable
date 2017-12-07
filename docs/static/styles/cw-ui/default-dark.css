@@ -1,0 +1,10 @@
+html,
+body{
+    height: 100%;
+}
+
+.example-page {
+    padding: 10px;
+    width: 720px;
+    margin: auto;
+}
