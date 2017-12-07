@@ -62,7 +62,7 @@ const props = {
     type: String,
     default: undefined
   },
-  // 选中
+  // 显示复选框选中
   selection: {
     type: Boolean,
     default: false

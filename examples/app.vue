@@ -1,5 +1,6 @@
 <template lang="html">
 <div class="example-page">
+  <h2>代码示例</h2>
   <div style="padding:10px;">
     <cw-treetable caption="默认的树形表格" :columns="table1.columns" :rows="table1.rows"></cw-treetable>
   </div>
@@ -20,6 +21,96 @@
     <button @click="handleClick">异步加载表格</button>
     <cw-treetable caption="动态加载的表格" :columns="table4.columns" :rows="table4.rows" selection @change="handleChange"></cw-treetable>
   </div>
+  <h2>API</h2>
+    <h5>Treetable props</h5>
+    <table class="api-define-table" style="width:100%">
+      <thead>
+        <tr>
+          <td>属性</td>
+          <td>说明</td>
+          <td>类型</td>
+          <td>默认值</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>columns</td>
+        <td>表格列数据信息</td>
+        <td>object[]</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>rows</td>
+        <td>表格行数据信息</td>
+        <td>object[]</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>display</td>
+        <td>显示方式<br/>可选的值 collapsed(折叠) | expand(展开)</td>
+        <td>string</td>
+        <td>expand</td>
+      </tr>
+      <tr>
+        <td>borderless</td>
+        <td>无边框形式</td>
+        <td>boolean</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>caption</td>
+        <td>表格名称</td>
+        <td>boolean</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>selection</td>
+        <td>显示复选框</td>
+        <td>boolean</td>
+        <td>false</td>
+      </tr>
+      <tr>
+        <td>columnId</td>
+        <td>唯一标识数据列</td>
+        <td>number</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>columnParentId</td>
+        <td>父级对象唯一标识数据列</td>
+        <td>number</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>columnHandle</td>
+        <td>树操作数据列</td>
+        <td>number</td>
+        <td>2</td>
+      </tr>
+      </tbody>
+    </table>
+    <h5>Treetable events</h5>
+    <table class="api-define-table" style="width:100%">
+      <thead>
+        <tr>
+          <td>事件名</td>
+          <td>说明</td>
+          <td>返回值</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>click</td>
+        <td>表格行单击时触发, 在次单击同一行选中失效</td>
+        <td>返回选中的行信息</td>
+      </tr>
+      <tr>
+        <td>change</td>
+        <td>表格复选框选择时触发</td>
+        <td>复选框选中的行信息数组</td>
+      </tr>
+      </tbody>
+    </table>
 </div>
 </template>
 

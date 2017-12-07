@@ -1,10 +1,27 @@
 html,
-body{
-    height: 100%;
+body {
+  height: 100%;
+  font-family: Lato, "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .example-page {
-    padding: 10px;
-    width: 720px;
-    margin: auto;
+  padding: 10px;
+  width: 720px;
+  margin: auto;
+}
+
+.api-define-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.api-define-table th,
+.api-define-table td {
+  border: 1px solid #ccc;
+  height: 32px;
+  vertical-align: middle;
+  padding: 0 16px 0 16px;
+  line-height: 1.5;
 }
