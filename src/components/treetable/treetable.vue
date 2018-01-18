@@ -62,7 +62,7 @@ const props = {
     type: String,
     default: undefined
   },
-  // 显示复选框选中
+  // 显示复选框
   selection: {
     type: Boolean,
     default: false
@@ -94,7 +94,7 @@ export default {
     };
   },
   mounted() {
-    console.log('treetable mounted.');
+    // console.log('treetable mounted.');
     TreeTableTranslator.translate({
       target: this.$refs.treetable,
       display: this.display,
@@ -104,8 +104,8 @@ export default {
     });
   },
   updated() {
-    console.log('treetable updated.');
-    console.log(this.columns);
+    // console.log('treetable updated.');
+    // console.log(this.columns);
     TreeTableTranslator.translate({
       target: this.$refs.treetable,
       display: this.display,

@@ -10,7 +10,7 @@
   </div>
 
   <div style="padding:0 10px 10px 10px;">
-    <cw-treetable caption="带复选框的表格" :columns="table3.columns" :rows="table3.rows" selection></cw-treetable>
+    <cw-treetable caption="带复选框的表格" :columns="table3.columns" :rows="table3.rows" @click="handleTreeTableClick" selection></cw-treetable>
   </div>
 
   <div style="padding:0 10px 10px 10px;">
@@ -537,6 +537,9 @@ export default {
     },
     handleChange(list) {
       console.log(list);
+    },
+    handleTreeTableClick(selectedRow){
+      console.log(selectedRow);
     }
   }
 };
